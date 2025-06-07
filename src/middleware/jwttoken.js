@@ -1,11 +1,13 @@
-import jwt, { decode } from "jsonwebtoken";
+import jwt from "jsonwebtoken";
 import dotenv from "dotenv"
 dotenv.config()
 
-const protect = await ((req , res , next)=>{
-    const token = req.header.authorization?.split('')[1]
+const protect =  ((req , res , next)=>{
+    const token = req.headers.authorization?.split(' ')[1]
 
-    if(!token) return res.status(401).json({message:"No Token Provide"})
+    if(!token){
+        return res.status(401).json({message:"No Token Provide"})
+    } 
         let key = process.env.JWT_SECRET
 
         jwt.verify(token ,key,(err,decode)=>{
@@ -16,3 +18,4 @@ const protect = await ((req , res , next)=>{
 })
     
 export default protect
+

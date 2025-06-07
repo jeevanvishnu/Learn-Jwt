@@ -4,6 +4,7 @@ import path from "path"
 import { fileURLToPath } from "url"
 import connectDb from "./config/db.js"
 import jwtRouter from "./router/jwtRouter.js"
+import protect from "./middleware/jwttoken.js"
 
 dotenv.config()
 
@@ -17,12 +18,10 @@ const app = express()
 app.set("view engine", 'ejs');
 app.set("views", path.join(__dirname, "views"));
 
-console.log("Current __dirname:", path.join(__dirname,  "views"));
-
-
 
 app.use(express.urlencoded({extended:true}))
 app.use(express.json())
+
 
 app.use('/api/jwt',jwtRouter)
 

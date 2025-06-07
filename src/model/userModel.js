@@ -1,15 +1,17 @@
 import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema({
-    name:{
+    email:{
         type:String,
-        required:true
+        required:true,
+        unique:true,
+        sparse:true
     },
     password:{
         type:String,
         required:true,
-        min:4,
-        max:16
+        minlength:[4,'Password must be at least 4 characters'],
+        
     }
 })
 
